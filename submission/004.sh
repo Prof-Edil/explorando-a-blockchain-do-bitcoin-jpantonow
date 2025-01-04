@@ -4,5 +4,8 @@ XPUB="xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1P
 INDEX=100
 DESCRIPTOR="tr(${XPUB}/0/*)"
 DERIVATION="tr(${XPUB}/0/${INDEX})"
-RESULT=$(bitcoin-cli deriveaddresses "$DERIVATION")
+
+bitcoin-cli importdescriptors "[{\"desc\":\"${DESCRIPTOR}\",\"active\":true,\"internal\":false,\"timestamp\":\"now\"}]" | jq .
+
+RESULT=$(bitcoin-cli deriveaddresses "$DERIVATION" | jq -r '.[0]')
 echo "$RESULT"
