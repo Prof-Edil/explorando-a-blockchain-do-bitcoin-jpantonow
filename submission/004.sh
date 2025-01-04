@@ -8,4 +8,6 @@ bitcoin-cli -named createwallet wallet_name="$WALLET_NAME" descriptors=true
 
 bitcoin-cli -rpcwallet="$WALLET_NAME" importdescriptors "[{\"desc\":\"tr($XPUB/$INDEX)\",\"timestamp\":\"now\",\"active\":true,\"range\":[$INDEX,$INDEX]}]"
 
-bitcoin-cli -rpcwallet="$WALLET_NAME" deriveaddresses "tr($XPUB/$INDEX)"
+ADDRESS=$(bitcoin-cli -rpcwallet="$WALLET_NAME" deriveaddresses "tr($XPUB/$INDEX)")
+
+echo "$ADDRESS"
