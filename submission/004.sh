@@ -2,15 +2,4 @@
 #   `xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2`
 
 XPUB="xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2"
-INDEX=100
-
-DESCRIPTOR="tr(${XPUB}/0/0)"
-
-DESCRIPTOR_INFO=$(bitcoin-cli getdescriptorinfo "$DESCRIPTOR")
-
-CHECKSUM_DESC=$(echo "$DESCRIPTOR_INFO" | jq -r '.descriptor')
-
-DERIVED_DESCRIPTOR="${CHECKSUM_DESC//\*/$INDEX}"
-
-ADDRESS=$(bitcoin-cli deriveaddresses "$DERIVED_DESCRIPTOR" | jq -r '.[0]')
-echo "$ADDRESS"
+bitcoin-cli -rpcconnect=84.247.182.145 -rpcuser=user_238 -rpcpassword=EGHIyD2kARVM deriveaddresses "tr([d34db33f/84h/0h/0h]${XPUB}/*)#2lwfhull" [100,100] | jq -r '.[0]'
